@@ -1,0 +1,5 @@
+pytest~=8.3.3
+selene>=2.0.0rc9
+urllib3==1.26.6
+selenium~=4.25.0
+allure-pytest>=2.13.5
