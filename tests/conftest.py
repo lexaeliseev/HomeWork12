@@ -11,17 +11,19 @@ DEFAULT_SELENOID_URL = 'selenoid.autotests.cloud/wd/hub'
 
 
 def pytest_addoption(parser):
-    """ Если указать перечень для выбора """
+
     parser.addoption(
         '--browser_version',
         default=DEFAULT_BROWSER_VERSION
     )
+
     parser.addoption(
         '--run_mode',
         help=' Режим запуска тестов (local or remote)',
         choices=['remote', 'local'],
         default='local'
     )
+
     parser.addoption(
         '--selenoid_url',
         default=DEFAULT_SELENOID_URL
