@@ -1,23 +1,31 @@
+import os
+
 import pytest
 from selene import browser
 from selenium.webdriver.chrome.options import Options
 from selenium import webdriver
 from utils import attach
-
+from dotenv import load_dotenv
 
 DEFAULT_BROWSER_VERSION = '125.0'
+
+
 def pytest_addoption(parser):
     """ Если указать перечень для выбора """
     parser.addoption(
         '--browser_version',
         help='Версия браузера в которой будут запущены тесты',
-        default='120.0',
         choices=['100.0', '120.0', '125.0']
     )
 
     # """ Просто указать параметр для параметризации """
     # parser.addoption('--browser_version'
     #                  )
+
+
+@pytest.fixture(scope='session', autouse=True)
+def load_env():
+    load_dotenv()
 
 
 @pytest.fixture(scope="function")
@@ -36,8 +44,11 @@ def setup_browser(request):
     }
 
     options.capabilities.update(selenoid_capabilities)
+
+    selenoid_login = os.getenv('LOGIN')
+    selenoid_password = os.getenv('PASSWORD')
     driver = webdriver.Remote(
-        command_executor="https://user1:1234@selenoid.autotests.cloud/wd/hub",
+        command_executor=f"https://{selenoid_login}:{selenoid_password}@selenoid.autotests.cloud/wd/hub",
         options=options)
 
     browser.config.driver = driver
