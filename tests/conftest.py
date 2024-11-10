@@ -8,16 +8,16 @@ from utils import attach
 DEFAULT_BROWSER_VERSION = '125.0'
 def pytest_addoption(parser):
     """ Если указать перечень для выбора """
-    # parser.addoption(
-    #     '--browser_version',
-    #     help='Версия браузера в которой будут запущены тесты',
-    #     default='120.0',
-    #     choices=['100.0', '120.0', '125.0']
-    # )
+    parser.addoption(
+        '--browser_version',
+        help='Версия браузера в которой будут запущены тесты',
+        default='120.0',
+        choices=['100.0', '120.0', '125.0']
+    )
 
-    """ Просто указать параметр для параметризации """
-    parser.addoption('--browser_version'
-                     )
+    # """ Просто указать параметр для параметризации """
+    # parser.addoption('--browser_version'
+    #                  )
 
 
 @pytest.fixture(scope="function")
