@@ -5,6 +5,7 @@ from selenium import webdriver
 from utils import attach
 
 
+DEFAULT_BROWSER_VERSION = '125.0'
 def pytest_addoption(parser):
     """ Если указать перечень для выбора """
     # parser.addoption(
@@ -23,6 +24,7 @@ def pytest_addoption(parser):
 @pytest.fixture(scope="function")
 def setup_browser(request):
     chrome_version = request.config.getoption('--browser_version')
+    chrome_version = chrome_version if chrome_version != '' else DEFAULT_BROWSER_VERSION
 
     options = Options()
     selenoid_capabilities = {
