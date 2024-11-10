@@ -16,8 +16,7 @@ def pytest_addoption(parser):
     # )
 
     """ Просто указать параметр для параметризации """
-    parser.addoption('--browser_version',
-                     default='100.0'
+    parser.addoption('--browser_version'
                      )
 
 
