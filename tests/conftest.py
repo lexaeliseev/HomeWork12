@@ -18,10 +18,6 @@ def pytest_addoption(parser):
         choices=['100.0', '120.0', '125.0']
     )
 
-    # """ Просто указать параметр для параметризации """
-    # parser.addoption('--browser_version'
-    #                  )
-
 
 @pytest.fixture(scope='session', autouse=True)
 def load_env():
@@ -47,7 +43,7 @@ def setup_browser(request):
 
     selenoid_login = os.getenv('LOGIN')
     selenoid_password = os.getenv('PASSWORD')
-    selenoid_url = os.getenv("SELENOID_ULR")
+    selenoid_url = os.getenv("SELENOID_URL")
     driver = webdriver.Remote(
         command_executor=f"https://{selenoid_login}:{selenoid_password}@{selenoid_url}",
         options=options)
