@@ -5,17 +5,35 @@ from selenium import webdriver
 from utils import attach
 
 
+def pytest_addoption(parser):
+    """ Если указать перечень для выбора """
+    # parser.addoption(
+    #     '--browser_version',
+    #     help='Версия браузера в которой будут запущены тесты',
+    #     default='120.0',
+    #     choices=['100.0', '120.0', '125.0']
+    # )
+
+    """ Просто указать параметр для параметризации """
+    parser.addoption('--browser_version',
+                     default='100.0'
+                     )
+
+
 @pytest.fixture(scope="function")
-def setup_browser():
+def setup_browser(request):
+    chrome_version = request.config.getoption('--browser_version')
+
     options = Options()
     selenoid_capabilities = {
         "browserName": "chrome",
-        "browserVersion": "125.0",
+        "browserVersion": chrome_version,
         "selenoid:options": {
             "enableVNC": True,
             "enableVideo": True
         }
     }
+
     options.capabilities.update(selenoid_capabilities)
     driver = webdriver.Remote(
         command_executor="https://user1:1234@selenoid.autotests.cloud/wd/hub",
