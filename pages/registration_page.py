@@ -9,10 +9,12 @@ class RegistrationPage:
         pass
 
     @allure.step('Открыть браузер и перейти на сайт')
-    def browser_open(self, url):
+    def url_open(self, url):
         browser.open(url)
         browser.driver.execute_script("$('#fixedban').remove()")
         browser.driver.execute_script("$('footer').remove()")
+        browser.driver.execute_script("$('#adplus-archor').remove()")
+        browser.driver.execute_script("$('#RightSide_Advertisement').remove()")
         return self
 
     @allure.step('Ввести значение в поле first_name')

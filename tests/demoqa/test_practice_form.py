@@ -14,7 +14,7 @@ from pages.registration_page import RegistrationPage
 def test_practice_form(setup_browser):
     registration = RegistrationPage()
 
-    registration.browser_open("/automation-practice-form")
+    registration.url_open("/automation-practice-form")
 
     """ WHEN """
     registration.fill_first_name("Алексей")
